@@ -1,12 +1,10 @@
-# bundle exec ruby list-gh-pr.rb
+#!/usr/bin/ruby
+#
+# usage: bundle exec ruby list-gh-pr.rb
 # lists recent open pull requests from others
 #
-# Generate an unscoped toekn at https://github.com/settings/tokens
-# and store it in ~/.netrc:
-#
-# machine api.github.com
-#  login (github-login)
-#  password (generated-token)
+# Copyright (c) 2021 zunda <zundan at gmail.com>
+# Published under MIT license
 #
 require 'netrc'
 require 'faraday'
