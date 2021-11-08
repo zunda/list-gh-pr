@@ -32,6 +32,7 @@ repos.each do |repo|
     {state: "open", sort: "updated", direction: "desc", per_page: 100},
     faraday_opts
   )
+  raise RuntimeError, r.body unless r.status == 200
   pulls = JSON.parse(r.body).reject{|p| p.dig('user', 'login') == github_user}
   if pulls.empty?
     $stderr.print "."
