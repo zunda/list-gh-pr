@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 #
 # usage: bundle exec ruby list-gh-pr.rb
-# lists recent open pull requests from others
+# lists recent open pull requests to non-fork repos from others
 #
 # Copyright (c) 2021 zunda <zundan at gmail.com>
 # Published under MIT license
@@ -25,7 +25,7 @@ r = Faraday.get("https://#{api_host}/users/#{github_user}/repos",
   faraday_opts
 )
 raise RuntimeError, r.body unless r.status == 200
-repos = JSON.parse(r.body).map{|e| e.dig('name')}
+repos = JSON.parse(r.body).reject{|e| e.dig('fork')}.map{|e| e.dig('name')}
 
 repos.each do |repo|
   r = Faraday.get("https://#{api_host}/repos/#{github_user}/#{repo}/pulls",
